@@ -30,7 +30,7 @@ api.route('/Login')
 api.route('/University')
 	.put(UniversityController.createUniversity);
 api.route('/University')
-	.get(Universitycontroller.createUniversity);
+	.get(UniversityController.createUniversity);
 api.route('/University')
 	.post(UniversityController.createUniversity);
 api.route('/University')
