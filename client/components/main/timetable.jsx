@@ -18,16 +18,9 @@ class Timetable extends React.Component {
         super(props);
         Autobind(this);
 
-        if (this.props.code != undefined){
-
-        } else {
-
-        }
-
         this.state = {
-            code: '',
-            university: '',
-            content: this.getContent(),
+            university: this.props.university,
+            content: [],
             table: this.getCleanTable(),
 
             scheduleCode: '',
@@ -36,20 +29,8 @@ class Timetable extends React.Component {
         };
     }
 
-    getContent(){
-        return [{
-            id: '',
-            university: 'University of Toronto',
-            name: 'Intro to 1',
-            faculty: 'CSC',
-            code: '200',
-            room: 'BA1200',
-            lecture_time: 'M-12-15',
-            tutorial_time: 'W-12-13'
-        }];
-    }
     setContent(courses){
-        this.setState({content: courses});
+        this.setState({content: courses},function(){console.log(this.state.content)});
     }
     getCleanTable(){
         let table = [];
@@ -113,17 +94,24 @@ class Timetable extends React.Component {
         }
         return table;
     }
+
     setTable(){
         let table = this.getCleanTable();
         let content = this.state.content;
+		let content2 = [];
+		for( let k=0;k<this.state.content.length;k++){
+			content2.push(this.state.content[k].split(", "));
+			console.log(content2[k]);
+		}
         for (let i = 0; i < content.length; i++){
-            let lec_time = content[i].lecture_time;
+            let lec_time = content2[i][6].trim();
             let lec_day = lec_time.split('-')[0];
             let lec_start = parseInt(lec_time.split('-')[1]);
             let lec_end = parseInt(lec_time.split('-')[2]);
             let lec_title_time = parseInt(lec_start) + parseInt(Math.floor((lec_end - lec_start)/2));
-            let name = content[i].name;
+            let name = content2[i][2];
             let lec_color = this.getRandomColor();
+			console.log(lec_day);
             switch (lec_day){
                 case 'M':
                     for (let t = lec_start - 8; t < lec_end - 8; t++){
@@ -135,6 +123,7 @@ class Timetable extends React.Component {
                     }
                     break;
                 case 'T':
+					console.log("hello");
                     for (let t = lec_start - 8; t < lec_end - 8; t++){
                         table[t].tuesday = true;
                         table[t].tuesdayColor = lec_color;
@@ -170,9 +159,14 @@ class Timetable extends React.Component {
                         }
                     }
                     break;
+				
+				default:
+					console.log("hjk");
+					break;
             }
 
-            let tut_time = content[i].tutorial_time;
+            let tut_time = content2[i][7].trim();
+			console.log(tut_time);
             let tut_day = tut_time.split('-')[0];
             let tut_start = parseInt(tut_time.split('-')[1]);
             let tut_end = parseInt(tut_time.split('-')[2]);
@@ -226,6 +220,7 @@ class Timetable extends React.Component {
                     break;
             }
         }
+		console.log(table);
         this.setState({table: table});
     }
     getRandomColor() {
@@ -240,7 +235,7 @@ class Timetable extends React.Component {
     onSave(){
         let courseIds = [];
         for (let i = 0; i < this.state.content.length; i++){
-            courseIds += [this.state.content[i].id];
+            courseIds += content2[i][0];
         }
         let context = this;
         let code = this.generateCode();
@@ -310,7 +305,7 @@ class Timetable extends React.Component {
                             ))}
                         </TableBody>
                     </Table>
-                    <RaisedButton label="Do something" onClick={this.setTable}/>
+                    <RaisedButton label="generate" onClick={this.setTable}/>
                 </div>
                 <Dialog
                     open={this.state.showScheduleCreated}
