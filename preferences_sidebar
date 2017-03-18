@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<h3> 
+			PREFERENCES		
+		</h3>
+	</head>
+	
+	
+	<body>
+	
+		<!-- Preferences
+			- no breaks 
+			- breaks
+			- early classes
+			- late classes
+		
+		
+		-->
+		
+		<p>
+			BREAKS
+		
+		</p>
+	
+		<form action = ""> 
+		<div class = "nobreaks">
+		<input type = "radio" name= "preferences" value = "NoBreak"> No breaks please! <br>
+		</div>
+		
+		<div class = "breaks">
+		<input type = "radio" name= "preferences" value = "Breaks"> Breaks please! <br>
+		</div>
+		
+		<div class = "doesntmatter">
+		<input type = "radio" name= "preferences" value = "Doesntmatter"> It doesn't matter! <br>
+		</div>
+		
+		
+		</form> <br>
+		
+		<p>
+			CLASSES
+		</p>
+		
+		
+		<div class = "earlyclasses">
+		<input type = "radio" name= "preferences" value = "EarlyClasses"> Early classes please! <br>
+		</div>
+		
+		<div class = "lateclasses">
+		<input type = "radio" name= "preferences" value = "LateClasses"> Late classes please! <br>
+		</div>
+		
+		<div class = "doesntmatter">
+		<input type = "radio" name= "preferences" value = "Doesntmatter"> It doesn't matter! <br>
+		</div>
+		
+		<br><input type = "submit" value = "Submit">
+		</form>
+		
+	
+	
+	</body>
+
+
+
+
+</html>
