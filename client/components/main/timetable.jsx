@@ -1,13 +1,16 @@
 import React from 'react';
 import lodash from 'lodash';
 import Autobind from 'react-autobind';
+import sa from 'superagent';
 
 import {Table, TableHeader, TableRow, TableHeaderColumn, TableBody, TableRowColumn} from 'material-ui/Table';
 import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
 import {browserHistory} from 'react-router';
 
 import Topbar from './topbar.jsx';
+import ScheduleCreated from '../dialogs/scheduleCreated.jsx';
 
 class Timetable extends React.Component {
     constructor(props) {
@@ -15,13 +18,18 @@ class Timetable extends React.Component {
         Autobind(this);
 
         this.state = {
+            university: 'University of Toronto',
             content: this.getContent(),
-            table: this.getCleanTable()
+            table: this.getCleanTable(),
+
+            scheduleCode: '',
+            showScheduleCreated: false
         }
     }
 
     getContent(){
         return [{
+            id: '',
             university: 'University of Toronto',
             name: 'Intro to 1',
             faculty: 'CSC',
@@ -93,7 +101,6 @@ class Timetable extends React.Component {
         }
         return table;
     }
-
     setTable(){
         let table = this.getCleanTable();
         let content = this.state.content;
@@ -209,7 +216,6 @@ class Timetable extends React.Component {
         }
         this.setState({table: table});
     }
-
     getRandomColor() {
         let letters = 'BCDEF'.split('');
         let color = '#';
@@ -219,12 +225,44 @@ class Timetable extends React.Component {
         return color;
     }
 
+    onSave(){
+        let courseIds = [];
+        for (let i = 0; i < this.state.content.length; i++){
+            courseIds += [this.state.content[i].id];
+        }
+        let context = this;
+        let code = this.generateCode();
+        sa.put('/api/schedule/').send({
+            code: code,
+            university: this.state.university,
+            courses: courseIds
+        }).end(function(err,res){
+            if (err){
+                console.log(err);
+            } else {
+                context.setState({scheduleCode: code, showScheduleCreated: true});
+            }
+        });
+    }
+    generateCode() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for( var i=0; i < 5; i++ ) {
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+        return text;
+    }
+
+    onCloseScheduleCreated(){
+        this.setState({showScheduleCreated: false});
+    }
+
     render() {
         const styles = lodash.cloneDeep(this.constructor.styles);
 
         return (
             <div style={styles.Wrapper}>
-                <Topbar/>
+                <Topbar onSave={this.onSave}/>
                 <h4 className="text-center" style={{margin: '0 0 0 0'}}>Time Table</h4>
                 <Table selectable={false}>
                     <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
@@ -251,6 +289,12 @@ class Timetable extends React.Component {
                     </TableBody>
                 </Table>
                 <RaisedButton label="Do something" onClick={this.setTable}/>
+                <Dialog
+                    open={this.state.showScheduleCreated}
+                    onRequestClose={this.onCloseScheduleCreated}
+                    contentStyle={styles.dialog}>
+                    <ScheduleCreated code={this.state.scheduleCode} dismiss={this.onCloseScheduleCreated}/>
+                </Dialog>
             </div>
         );
     }

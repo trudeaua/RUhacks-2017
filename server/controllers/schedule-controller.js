@@ -2,6 +2,14 @@ import Response from './response-controller.js';
 import * as firebase from 'firebase';
 
 export default {
+
+    /**
+     * SCHEDULE SCHEMA:
+     * code: String
+     * university: String
+     * courses: [course_id]
+     */
+
     createSchedule(req, res) {
         let schedule = req.body;
         firebase.database().ref().child('schedules').push(schedule).then(function(snapshot){
