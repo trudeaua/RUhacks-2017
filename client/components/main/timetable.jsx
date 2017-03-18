@@ -19,13 +19,13 @@ class Timetable extends React.Component {
         Autobind(this);
 
         this.state = {
-            university: 'University of Toronto',
+            university: this.props.university,
             content: this.getContent(),
             table: this.getCleanTable(),
 
             scheduleCode: '',
             showScheduleCreated: false
-        }
+        };
     }
 
     getContent(){

@@ -10,6 +10,7 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            university: this.props.location.query.university
         };
     }
 
@@ -18,7 +19,7 @@ class Main extends React.Component {
 
         return (
             <div style={styles.Wrapper}>
-                <Timetable/>
+                <Timetable university={this.state.university}/>
             </div>
         );
     }
