@@ -1,6 +1,7 @@
 import express from 'express';
 import CourseController from '../controllers/course-controller';
 import LoginController from '../controllers/login-controller';
+
 const api = express.Router();
 
 api.get('/', function(req, res){
