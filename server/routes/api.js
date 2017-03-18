@@ -1,5 +1,6 @@
 import express from 'express';
 import CourseController from '../controllers/course-controller';
+import LoginController from '../controllers/login-controller';
 
 const api = express.Router();
 
@@ -12,9 +13,9 @@ api.route('/Course')
 api.route('/Course')
 	.get(CourseController.createCourse);
 api.route('/Course')
-	.post(courseController.createCourse);
+	.post(CourseController.createCourse);
 api.route('/Course')
-	.delete(courseController.createCourse);
+	.delete(CourseController.createCourse);
 
 api.route('/Login')
 	.put(LoginController.createLogin);

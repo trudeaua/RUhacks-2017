@@ -20,7 +20,7 @@ export default {
         });
         firebase.database().ref().child('courses').delete(course).then(function(snapshot){
         	Response.sendMessage(res, 'Successfully removed course');
-        });
+        });pm
     }
 };
 //get grab
