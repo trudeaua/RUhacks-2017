@@ -1,15 +1,11 @@
-import Course from '../models/course.js';
 import Response from './response-controller.js';
+import * as firebase from 'firebase';
 
 export default {
     createCourse(req, res) {
-        let course = new Course(req.body);
-        course.save(function(err) {
-            if (err) {
-                Response.sendError(res, err);
-            } else {
-                Response.sendMessage(res, 'Course created.');
-            }
+        let course = req.body;
+        firebase.database().ref().child('courses').push(course).then(function(snapshot){
+            Response.sendMessage(res, 'Successfully created course');
         });
     }
 };

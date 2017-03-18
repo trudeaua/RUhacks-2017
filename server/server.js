@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import http from 'http';
 import mongoose from 'mongoose';
+import * as firebase from 'firebase';
 
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
@@ -15,13 +16,22 @@ import index from './routes/index.js';
 const app = express();
 const compiler = webpack(webpackConfig);
 
-mongoose.connect('mongodb://admin:admin@ds135690.mlab.com:35690/ruhacks', function(err){
-    if (err) {
-        throw err;
-    } else {
-        console.log("Successfully connected to database.");
-    }
-});
+// mongoose.connect('mongodb://admin:admin@ds135690.mlab.com:35690/ruhacks', function(err){
+//     if (err) {
+//         throw err;
+//     } else {
+//         console.log("Successfully connected to database.");
+//     }
+// });
+
+var config = {
+    apiKey: "AIzaSyDckD6w56UPP8mHh9pZcP5pelwnWiOIBCM",
+    authDomain: "ruhacks-18f97.firebaseapp.com",
+    databaseURL: "https://ruhacks-18f97.firebaseio.com",
+    storageBucket: "ruhacks-18f97.appspot.com",
+    messagingSenderId: "554810154725"
+};
+firebase.initializeApp(config);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
