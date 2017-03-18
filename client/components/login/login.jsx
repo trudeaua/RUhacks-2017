@@ -35,13 +35,9 @@ class Login extends React.Component {
 			</select>
 			<button type="submit" className="button" style ={styles.button}>Generate My Timetable!</button>
 		  <h4 style={styles.h2}>Or Input Your 4-Digit Code From A Previous Session</h4>
-			<input type="text" style={styles.txt} placeholder="ID" name="ID" maxLength="4" className="txt"></input>
-
-			<button type="submit" className="button" style ={styles.button}>Go To My Timetable!</button>
-
 			<input type="text" style={styles.txt} placeholder="ID" name="ID" maxLength="4" className="txt"/>
 
-			<button type="submit" className="button" style ={styles.button} onClick={this.onGo}>Go!</button>
+			<button type="submit" className="button" style ={styles.button} onClick={this.onGo}>Go To My Timetable!</button>
 
 		  </form>
 		</div>
@@ -62,7 +58,8 @@ Login.styles = {
 		
 	},
 	content:{
-		marginTop:"7em",
+		marginTop:"3em",
+		marginBottom:"3em"
 	},
 
 	formContainer:{
