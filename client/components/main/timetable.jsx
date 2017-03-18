@@ -10,6 +10,7 @@ import Dialog from 'material-ui/Dialog';
 import {browserHistory} from 'react-router';
 
 import Topbar from './topbar.jsx';
+import Sidebar from './sidebar.jsx';
 import ScheduleCreated from '../dialogs/scheduleCreated.jsx';
 
 class Timetable extends React.Component {
@@ -262,33 +263,38 @@ class Timetable extends React.Component {
 
         return (
             <div style={styles.Wrapper}>
-                <Topbar onSave={this.onSave}/>
-                <h4 className="text-center" style={{margin: '0 0 0 0'}}>Time Table</h4>
-                <Table selectable={false}>
-                    <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                        <TableRow>
-                            <TableHeaderColumn/>
-                            <TableHeaderColumn>Monday</TableHeaderColumn>
-                            <TableHeaderColumn>Tuesday</TableHeaderColumn>
-                            <TableHeaderColumn>Wednesday</TableHeaderColumn>
-                            <TableHeaderColumn>Thursday</TableHeaderColumn>
-                            <TableHeaderColumn>Friday</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false} >
-                        {this.state.table.map( (row, index) => (
-                            <TableRow displayBorder={true} key={index}>
-                                <TableRowColumn>{row.time}</TableRowColumn>
-                                <TableRowColumn style={{backgroundColor: row.mondayColor}}>{row.mondayText}</TableRowColumn>
-                                <TableRowColumn style={{backgroundColor: row.tuesdayColor}}>{row.tuesdayText}</TableRowColumn>
-                                <TableRowColumn style={{backgroundColor: row.wednesdayColor}}>{row.wednesdayText}</TableRowColumn>
-                                <TableRowColumn style={{backgroundColor: row.thursdayColor}}>{row.thursdayText}</TableRowColumn>
-                                <TableRowColumn style={{backgroundColor: row.fridayColor}}>{row.fridayText}</TableRowColumn>
+                <div className="col-xs-12 col-md-3">
+                    <Sidebar/>
+                </div>
+                <div className="col-xs-12 col-md-9">
+                    <Topbar onSave={this.onSave}/>
+                    <h4 className="text-center" style={{margin: '0 0 0 0'}}>Time Table</h4>
+                    <Table selectable={false}>
+                        <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                            <TableRow>
+                                <TableHeaderColumn/>
+                                <TableHeaderColumn>Monday</TableHeaderColumn>
+                                <TableHeaderColumn>Tuesday</TableHeaderColumn>
+                                <TableHeaderColumn>Wednesday</TableHeaderColumn>
+                                <TableHeaderColumn>Thursday</TableHeaderColumn>
+                                <TableHeaderColumn>Friday</TableHeaderColumn>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                <RaisedButton label="Do something" onClick={this.setTable}/>
+                        </TableHeader>
+                        <TableBody displayRowCheckbox={false} >
+                            {this.state.table.map( (row, index) => (
+                                <TableRow displayBorder={true} key={index}>
+                                    <TableRowColumn>{row.time}</TableRowColumn>
+                                    <TableRowColumn style={{backgroundColor: row.mondayColor}}>{row.mondayText}</TableRowColumn>
+                                    <TableRowColumn style={{backgroundColor: row.tuesdayColor}}>{row.tuesdayText}</TableRowColumn>
+                                    <TableRowColumn style={{backgroundColor: row.wednesdayColor}}>{row.wednesdayText}</TableRowColumn>
+                                    <TableRowColumn style={{backgroundColor: row.thursdayColor}}>{row.thursdayText}</TableRowColumn>
+                                    <TableRowColumn style={{backgroundColor: row.fridayColor}}>{row.fridayText}</TableRowColumn>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <RaisedButton label="Do something" onClick={this.setTable}/>
+                </div>
                 <Dialog
                     open={this.state.showScheduleCreated}
                     onRequestClose={this.onCloseScheduleCreated}

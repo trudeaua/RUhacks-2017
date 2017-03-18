@@ -17,13 +17,8 @@ class Main extends React.Component {
         const styles = lodash.cloneDeep(this.constructor.styles);
 
         return (
-            <div style={styles.Wrapper} className="container">
-                <div className="col-xs-12 col-md-3">
-                    <Sidebar/>
-                </div>
-                <div className="col-xs-12 col-md-9">
-                    <Timetable/>
-                </div>
+            <div style={styles.Wrapper}>
+                <Timetable/>
             </div>
         );
     }
