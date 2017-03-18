@@ -17,12 +17,16 @@ export default {
         });
     },
     retrieveSchedule(req, res){
-        firebase.database().ref('/schedules/' + req.query.id).once('value').then(function(snapshot) {
-            Response.sendObject(res, 'val', snapshot.val());
+        firebase.database().ref('/schedules/').orderByChild('code').equalTo(req.query.code).once('value').then(function(snapshot) {
+            if (snapshot.val() === null){
+                Response.sendFailure(res, 'No schedule found');
+            } else {
+                Response.sendObject(res, 'val', snapshot.val());
+            }
         });
     },
     updateSchedule(req, res) {
-        let course = req.body;
+        let schedule = req.body;
         firebase.database().ref('/schedules/' + req.query.id).set(schedule).then(function(snapshot) {
             Response.sendMessage(res, 'Successfully updated schedule.');
         });

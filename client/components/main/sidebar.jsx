@@ -12,10 +12,12 @@ class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         Autobind(this);
+
+        this.onSetContent = props.onSetContent;
         this.state = {
             university: 'University of Toronto',
-		content:[],
-		coursesList:[]
+			content:[],
+			coursesList:[]
         };
 
     }
@@ -46,7 +48,7 @@ class Sidebar extends React.Component {
 					
                         {this.state.content.map( (row, index) => (
                             <ul key={index}>
-						<input type="checkbox" style={styles.className} className="classData" value={" " + row.faculty + " " + row.code + ": " + " " + row.room}/>{" " + row.faculty + " " + row.code + ": " + " " + row.name}
+						<input type="checkbox" style={styles.className} className="classData" value={" " + row.faculty + ", " + row.code + ", " + row.room}/>{[" " + row.faculty + ", " + row.code + ", " + row.name]}
 							</ul>
                        ))}
 				</form>
@@ -59,11 +61,11 @@ class Sidebar extends React.Component {
 		var values = [],
 		inputs = document.getElementsByTagName("input");
 
-	for (var i = inputs.length -1 ; i>= 0; i--){
-    if (inputs[i].type === "checkbox" && inputs[i].checked){
-	values.push(inputs[i].value);}
-	}
-	return values;
+		for (var i = inputs.length -1 ; i>= 0; i--){
+			if (inputs[i].type === "checkbox" && inputs[i].checked){
+			values.push(inputs[i].value);}
+		}
+		return values;
 	
 	}
 }

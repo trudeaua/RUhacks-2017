@@ -18,8 +18,15 @@ class Timetable extends React.Component {
         super(props);
         Autobind(this);
 
+        if (this.props.code != undefined){
+
+        } else {
+
+        }
+
         this.state = {
-            university: this.props.university,
+            code: '',
+            university: '',
             content: this.getContent(),
             table: this.getCleanTable(),
 
@@ -39,6 +46,9 @@ class Timetable extends React.Component {
             lecture_time: 'M-12-15',
             tutorial_time: 'W-12-13'
         }];
+    }
+    setContent(courses){
+        this.setState({content: courses});
     }
     getCleanTable(){
         let table = [];
@@ -264,7 +274,7 @@ class Timetable extends React.Component {
         return (
             <div style={styles.Wrapper}>
                 <div className="col-xs-12 col-md-3">
-                    <Sidebar/>
+                    <Sidebar onSetContent={this.setContent}/>
                 </div>
                 <div className="col-xs-12 col-md-9">
                     <Topbar onSave={this.onSave}/>
