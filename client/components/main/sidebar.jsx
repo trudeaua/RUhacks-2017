@@ -6,6 +6,7 @@ import {Table, TableHeader, TableRow, TableHeaderColumn, TableBody, TableRowColu
 
 import {browserHistory} from 'react-router';
 
+import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
 
@@ -20,7 +21,8 @@ class Sidebar extends React.Component {
             university: 'University of Toronto',
 			content:[],
 			coursesList:[],
-			values:[]
+			values:[],
+            search:''
         };
 
         this.getCourses();
@@ -51,21 +53,28 @@ class Sidebar extends React.Component {
             this.onSetContent(this.state.values);
         });
     }
+
+    onTextFieldChange(e){
+        this.setState({search: e.target.value});
+    }
     render() {
         const styles = lodash.cloneDeep(this.constructor.styles);
 
         return (
             <div style={styles.Wrapper}>
-				<input type="text" style={styles.searchBar} placeholder="Search For Courses..."/>
+                <TextField floatingLabelText="Search" onChange={this.onTextFieldChange}/><br/>
 				<form className="scrollBox" style={styles.scrollBox}>
-						
-                        {this.state.content.map( (row, index) => (
+                    {
+                        this.state.content.filter((row) => {
+                            return row.code.includes(this.state.search) || this.state.search === '';
+                        }).map( (row, index) => (
                             <ul key={index}>
-						<Checkbox type="checkbox" labelPosition='right' style={styles.classData} className="classData" value={[
-							row.id+", "+row.university+", "+row.name+", "+row.faculty + ", " + row.code + ", " + row.room+", "+row.lecture_times+", "+row.tutorial_times]}/>
-							{[" " + row.faculty + ", " + row.code + ", " + row.name]}
+						        <Checkbox type="checkbox" labelPosition='right' style={styles.classData} className="classData" value={[
+							        row.id+", "+row.university+", "+row.name+", "+row.faculty + ", " + row.code + ", " + row.room+", "+row.lecture_times+", "+row.tutorial_times]}/>
+							        {[" " + row.faculty + ", " + row.code + ", " + row.name]}
 							</ul>
-                       ))}
+                       ))
+                    }
 				</form>
 				<button style={styles.button} onClick={this.addCourses}>Set</button>
 				<button style={styles.button} onClick={this.generate}>Auto Fit</button>
