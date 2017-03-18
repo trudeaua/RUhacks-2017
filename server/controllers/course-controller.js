@@ -39,33 +39,72 @@ export default {
     },
 
     generateCourses(req, res){
-        data = [{
-            university: 'University of Toronto',
-            name: 'Intro to ',
-            faculty: 'CSC',
-            code: '20',
-            room: 'BA12',
+        let data = [{
+            university: 'Ryerson University',
+            name: 'Calculus',
+            faculty: 'Math',
+            code: 'MTH 310',
+            room: 'DSQ 24',
             lecture_times: [
-                'M-12-1'
+                'M-11-13'
             ],
             tutorial_times: [
-                'W-12-1'
+                'W-8-9'
             ]
         }, {
-            university: 'University of Toronto',
-            name: 'Intro to ',
-            faculty: 'CSC',
-            code: '20',
-            room: 'BA12',
+            university: 'Ryerson University',
+            name: 'Data Structures and Algorithms',
+            faculty: 'Computer Science',
+            code: 'DSA 452',
+            room: 'DSQ 12',
             lecture_times: [
-                'M-12-1'
+                'T-15-16'
             ],
             tutorial_times: [
-                'W-12-1'
+                'F-12-1'
+            ]
+        },
+        {
+            university: 'Ryerson University',
+            name: 'Discrete Math I',
+            faculty: 'Computer Science',
+            code: 'MTH 21',
+            room: 'DSQ 13',
+            lecture_times: [
+                'W-9-11'
+            ],
+            tutorial_times: [
+                'R-10-11'
+            ]
+        },
+        {
+            university: 'Ryerson',
+            name: 'Discrete Structure',
+            faculty: 'Computer Science',
+            code: 'CPS 420',
+            room: 'TRS 216',
+            lecture_times: [
+                'T-8-9'
+            ],
+            tutorial_times: [
+                'M-11-12'
+            ]
+        },
+        {
+            university: 'Ryerson University',
+            name: 'Genetics',
+            faculty: 'Science',
+            code: 'BIO 456',
+            room: 'LIB 072',
+            lecture_times: [
+                'F-15-16'
+            ],
+            tutorial_times: [
+                'T-9-10'
             ]
         }];
         for (let i = 0; i < data.length; i++){
-            firebase.database().ref().child('courses').push(data);
+            firebase.database().ref().child('courses').push(data[i]);
         }
         Response.sendMessage(res, 'Successfully populated courses');
     },
