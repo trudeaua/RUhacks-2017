@@ -39,52 +39,32 @@ export default {
     },
 
     generateCourses(req, res){
-        for (let i = 0; i < 10; i++){
-            let data = {
-                university: 'University of Toronto',
-                name: 'Intro to ' + i,
-                faculty: 'CSC',
-                code: '20'+i,
-                room: 'BA12'+i,
-                lecture_times: [
-                    'M-12-1'+i
-                ],
-                tutorial_times: [
-                    'W-12-1'+i
-                ]
-            };
-            firebase.database().ref().child('courses').push(data);
-        }
-        for (let i = 0; i < 10; i++){
-            let data = {
-                university: 'Ryerson University',
-                name: 'Intro to ' + i,
-                faculty: 'CSC',
-                code: '20'+i,
-                room: 'BA12'+i,
-                lecture_times: [
-                    'M-12-1'+i
-                ],
-                tutorial_times: [
-                    'W-12-1'+i
-                ]
-            };
-            firebase.database().ref().child('courses').push(data);
-        }
-        for (let i = 0; i < 10; i++){
-            let data = {
-                university: 'Macmaster University',
-                name: 'Intro to ' + i,
-                faculty: 'CSC',
-                code: '20'+i,
-                room: 'BA12'+i,
-                lecture_times: [
-                    'M-12-1'+i
-                ],
-                tutorial_times: [
-                    'W-12-1'+i
-                ]
-            };
+        data = [{
+            university: 'University of Toronto',
+            name: 'Intro to ',
+            faculty: 'CSC',
+            code: '20',
+            room: 'BA12',
+            lecture_times: [
+                'M-12-1'
+            ],
+            tutorial_times: [
+                'W-12-1'
+            ]
+        }, {
+            university: 'University of Toronto',
+            name: 'Intro to ',
+            faculty: 'CSC',
+            code: '20',
+            room: 'BA12',
+            lecture_times: [
+                'M-12-1'
+            ],
+            tutorial_times: [
+                'W-12-1'
+            ]
+        }];
+        for (let i = 0; i < data.length; i++){
             firebase.database().ref().child('courses').push(data);
         }
         Response.sendMessage(res, 'Successfully populated courses');
