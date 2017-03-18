@@ -40,6 +40,9 @@ class Timetable extends React.Component {
             tutorial_time: 'W-12-13'
         }];
     }
+    setContent(courses){
+        this.setState({content: courses});
+    }
     getCleanTable(){
         let table = [];
         for (let i = 8; i < 12; i++){
@@ -264,7 +267,7 @@ class Timetable extends React.Component {
         return (
             <div style={styles.Wrapper}>
                 <div className="col-xs-12 col-md-3">
-                    <Sidebar/>
+                    <Sidebar onSetContent={this.setContent}/>
                 </div>
                 <div className="col-xs-12 col-md-9">
                     <Topbar onSave={this.onSave}/>
