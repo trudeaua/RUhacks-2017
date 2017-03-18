@@ -7,6 +7,7 @@ import {Table, TableHeader, TableRow, TableHeaderColumn, TableBody, TableRowColu
 import {browserHistory} from 'react-router';
 
 import RaisedButton from 'material-ui/RaisedButton';
+import Checkbox from 'material-ui/Checkbox';
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -17,7 +18,8 @@ class Sidebar extends React.Component {
         this.state = {
             university: 'University of Toronto',
 			content:[],
-			coursesList:[]
+			coursesList:[],
+			values:[]
         };
 
     }
@@ -29,6 +31,7 @@ class Sidebar extends React.Component {
 			console.log(res.body.value);
 			for(let k in res.body.value){
 				ajaxResult.push(res.body.value[k]);
+				ajaxResult[ajaxResult.length-1]["key"] = k;
 			}
 			console.log(ajaxResult);
 			
@@ -41,14 +44,15 @@ class Sidebar extends React.Component {
 
         return (
             <div style={styles.Wrapper}>
-                <h1>Sidebar</h1>
-                <RaisedButton id="loadBtn" label='load courses' onClick={this.getCourses}/>
+                <RaisedButton id="loadBtn" label='import course data' onClick={this.getCourses}/>
 				<input type="text" style={styles.searchBar} placeholder="Search For Courses..."/>
 				<form className="scrollBox" style={styles.scrollBox}>
-					
+						
                         {this.state.content.map( (row, index) => (
                             <ul key={index}>
-						<input type="checkbox" style={styles.className} className="classData" value={" " + row.faculty + ", " + row.code + ", " + row.room}/>{[" " + row.faculty + ", " + row.code + ", " + row.name]}
+						<Checkbox type="checkbox" labelPosition='right' style={styles.classData} className="classData" value={[
+							row.id+", "+row.university+", "+row.name+", "+row.faculty + ", " + row.code + ", " + row.room+", "+row.lecture_times+", "+row.tutorial_times]}/>
+							{[" " + row.faculty + ", " + row.code + ", " + row.name]}
 							</ul>
                        ))}
 				</form>
@@ -58,15 +62,14 @@ class Sidebar extends React.Component {
         );
     }
 	addCourses(){
-		var values = [],
-		inputs = document.getElementsByTagName("input");
+		var inputs = document.getElementsByTagName("input");
 
 		for (var i = inputs.length -1 ; i>= 0; i--){
 			if (inputs[i].type === "checkbox" && inputs[i].checked){
-			values.push(inputs[i].value);}
+			this.state.values.push(inputs[i].value);}
 		}
-		return values;
-	
+		console.log(this.state.values);
+		this.onSetContent(this.state.values);
 	}
 }
 
@@ -76,12 +79,11 @@ scrollBox:{
 	width:"100%",
 	border:"1px solid #ccc",
 	borderTop:"none",
-	font:"16px/26px Georgia, Garamond, Serif",
 	overflow:"auto",
 	marginBottom:"1em",
 },
 classData:{
-	font:"16px/26px Georgia, Garamond, Serif",
+	width:"100%"
 },
 searchBar:{
 	marginTop:"1em",
