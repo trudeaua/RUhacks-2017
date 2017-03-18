@@ -46,10 +46,14 @@ export default {
             code: 'MTH 310',
             room: 'DSQ 24',
             lecture_times: [
-                'M-11-13'
+                'M-11-13',
+                'T-15-16',
+                'W-7-9',
+                'R-12-14'
             ],
             tutorial_times: [
-                'W-8-9'
+                'W-8-9',
+                'T-7-9'
             ]
         }, {
             university: 'Ryerson University',
@@ -58,10 +62,13 @@ export default {
             code: 'DSA 452',
             room: 'DSQ 12',
             lecture_times: [
-                'T-15-16'
+                'T-15-16',
+                'M-9-10',
+                'W-8-9'
             ],
             tutorial_times: [
-                'F-12-1'
+                'F-12-1',
+                'F-10-11'
             ]
         },
         {
@@ -71,10 +78,15 @@ export default {
             code: 'MTH 21',
             room: 'DSQ 13',
             lecture_times: [
-                'W-9-11'
+                'W-9-11',
+                'M-9-11',
+                'T-9-11',
+                'R-9-11',
+                'F-9-11'
             ],
             tutorial_times: [
-                'R-10-11'
+                'R-10-11',
+                'F-15-16'
             ]
         },
         {
@@ -84,10 +96,13 @@ export default {
             code: 'CPS 420',
             room: 'TRS 216',
             lecture_times: [
-                'T-8-9'
+                'T-8-9',
+                'R-8-9'
             ],
             tutorial_times: [
-                'M-11-12'
+                'M-11-12',
+                'M-14-15',
+                'R-14-15'
             ]
         },
         {
@@ -97,10 +112,13 @@ export default {
             code: 'BIO 456',
             room: 'LIB 072',
             lecture_times: [
-                'F-15-16'
+                'F-15-16',
+                'F-10-11',
+                'T-12-13'
             ],
             tutorial_times: [
-                'T-9-10'
+                'T-9-10',
+                'W-11-12'
             ]
         }];
         for (let i = 0; i < data.length; i++){
