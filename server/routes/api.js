@@ -7,7 +7,7 @@ api.get('/', function(req, res){
     res.send("Hello World")
 });
 
-api.route('/course')
+api.route('/Course')
     .put(CourseController.createCourse);
 
 export default api;
