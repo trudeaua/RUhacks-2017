@@ -296,7 +296,11 @@ class Timetable extends React.Component {
     onClosePreferences(){
         this.setState({showPreferences: false});
     }
-    onGenerateSchedule(){
+    onGenerateSchedule(time, gap){
+        console.log('here ' + time + ' ' + gap);
+        this.onClosePreferences();
+    }
+    onShowPreferences(){
         console.log('here');
         this.setState({showPreferences: true});
     }
@@ -310,7 +314,7 @@ class Timetable extends React.Component {
         return (
             <div style={styles.Wrapper}>
                 <div className="col-xs-12 col-md-3">
-                    <Sidebar onSetContent={this.setContent} onGenerate={this.onGenerateSchedule}/>
+                    <Sidebar onSetContent={this.setContent} onGenerate={this.onShowPreferences}/>
                 </div>
                 <div className="col-xs-12 col-md-9">
                     <Topbar onSave={this.onSave}/>

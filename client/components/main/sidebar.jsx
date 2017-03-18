@@ -77,7 +77,7 @@ class Sidebar extends React.Component {
                     }
 				</form>
 				<button style={styles.button} onClick={this.addCourses}>Set</button>
-				<button style={styles.button} onClick={this.generate}>Auto Fit</button>
+				<button style={styles.button} onClick={this.generate}>Auto Generate</button>
             </div>
         );
     }

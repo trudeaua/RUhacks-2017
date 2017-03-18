@@ -14,16 +14,21 @@ class Preferences extends React.Component {
     constructor(props) {
         super(props);
         Autobind(this);
+        this.onGenerate = this.props.onGenerate;
 
         this.state = {
-
+            time: '',
+            gap: ''
         };
     }
-    onTimeChange(){
-
+    onTimeChange(e, index, val){
+        this.setState({time: val});
     }
-    onGapChange(){
-
+    onGapChange(e, index, val){
+        this.setState({gap: val});
+    }
+    generate(){
+        this.onGenerate(this.state.time, this.state.gap);
     }
     render() {
         const styles = lodash.cloneDeep(this.constructor.styles);
@@ -34,7 +39,7 @@ class Preferences extends React.Component {
                 <SelectField
                     floatingLabelText="Time Preference"
                     onChange={this.onTimeChange}
-                    value={this.state.university}
+                    value={this.state.time}
                     style={{margin: '2% 0 2% 0', textAlign:'left'}}>
                     <MenuItem value='No Preference' primaryText="No Preference" />
                     <MenuItem value='Prefer Mornings' primaryText="Prefer Mornings" />
@@ -43,13 +48,13 @@ class Preferences extends React.Component {
                 <SelectField
                     floatingLabelText="Course Gap Preference"
                     onChange={this.onGapChange}
-                    value={this.state.university}
+                    value={this.state.gap}
                     style={{margin: '2% 0 2% 0', textAlign:'left'}}>
                     <MenuItem value='No Preference' primaryText="No Preference" />
                     <MenuItem value='Prefer Short Gaps' primaryText="Prefer Short Gaps" />
                     <MenuItem value='Prefer Long Gaps' primaryText="Prefer Long Gaps" />
                 </SelectField><br/>
-                <RaisedButton label="Generate"/>
+                <RaisedButton label="Generate" onClick={this.generate}/>
             </div>
         );
     }
