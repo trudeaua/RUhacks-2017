@@ -1,14 +1,78 @@
 import express from 'express';
-import path from 'path';
 import bodyParser from 'body-parser';
+import http from 'http';
+
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackConfig from '../webpack.config.js'
+
+import api from './routes/api.js';
+import dev from './routes/dev.js';
+import index from './routes/index.js';
 
 const app = express();
+const compiler = webpack(webpackConfig);
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-app.use('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
+app.use(webpackMiddleware(compiler, {
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+}));
+app.use(webpackHotMiddleware(compiler));
+
+app.use('/client', express.static(__dirname + '/client'));
+app.use('/content', express.static(__dirname + '/client/content'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
+
+app.use('/api', api);
+app.use('/dev', dev);
+app.use('/', index);
+
+app.use(function(req, res){
+    let err = new Error('Not Found');
+    err.status = 404;
+    res.json({message: "404 Not Found", req: req.url});
+});
+app.use(function(err, req, res) {
+    res.status(err.status || 500);
+    res.status(status).json('error', {
+        message: err.message,
+        error: err
+    });
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+app.set('port', 3000);
 
+const server = http.createServer(app);
+server.listen(3000);
+server.on('error', function(err){
+    if (err.syscall !== 'listen') {
+        throw err;
+    }
+
+    let bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
+
+    switch (err.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw err;
+    }
+});
+server.on('listening', function(){
+    console.log('Server running on port 3000')
+});
