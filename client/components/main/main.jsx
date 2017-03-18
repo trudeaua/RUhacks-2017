@@ -4,7 +4,7 @@ import {browserHistory} from 'react-router';
 
 import Sidebar from './sidebar.jsx';
 import Timetable from './timetable.jsx';
-import Topbar from './topbar.jsx';
+import Topbar from './topbar.jsx'
 
 class Main extends React.Component {
     constructor(props) {
@@ -22,7 +22,6 @@ class Main extends React.Component {
                     <Sidebar/>
                 </div>
                 <div className="col-xs-12 col-md-9">
-                    <Topbar/>
                     <Timetable/>
                 </div>
             </div>

@@ -3,7 +3,10 @@ import lodash from 'lodash';
 import Autobind from 'react-autobind';
 
 import {Table, TableHeader, TableRow, TableHeaderColumn, TableBody, TableRowColumn} from 'material-ui/Table';
+import Divider from 'material-ui/Divider';
 import {browserHistory} from 'react-router';
+
+import Topbar from './topbar.jsx';
 
 class Timetable extends React.Component {
     constructor(props) {
@@ -83,6 +86,8 @@ class Timetable extends React.Component {
 
         return (
             <div style={styles.Wrapper}>
+                <Topbar/>
+                <h4 className="text-center" style={{margin: '0 0 0 0'}}>Time Table</h4>
                 <Table selectable={false}>
                     <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                         <TableRow>
