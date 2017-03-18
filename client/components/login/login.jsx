@@ -1,13 +1,19 @@
 import React from 'react';
 import lodash from 'lodash';
+import Autobind from 'react-autobind';
 import {browserHistory} from 'react-router';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
+        Autobind(this);
         this.state = {
         };
     }
+
+    onGo(){
+    	browserHistory.push('/main');
+	}
 
     render() {
         const styles = lodash.cloneDeep(this.constructor.styles);
@@ -26,9 +32,9 @@ class Login extends React.Component {
 			  <option value="uoft">University of Toronto</option>
 			  <option value="ryerson">Ryerson University</option>
 			</select>
-			<input type="text" style={styles.txt} placeholder="ID" name="ID" maxLength="4" className="txt"></input>
+			<input type="text" style={styles.txt} placeholder="ID" name="ID" maxLength="4" className="txt"/>
 
-			<button type="submit" className="button" style ={styles.button}>Go!</button>
+			<button type="submit" className="button" style ={styles.button} onClick={this.onGo}>Go!</button>
 		  </form>
 		</div>
 		</div>
