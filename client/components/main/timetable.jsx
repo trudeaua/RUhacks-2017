@@ -30,7 +30,10 @@ class Timetable extends React.Component {
     }
 
     setContent(courses){
-        this.setState({content: courses},function(){console.log(this.state.content)});
+        let context = this;
+        this.setState({content: courses}, function(){
+            context.setTable();
+        });
     }
     getCleanTable(){
         let table = [];
@@ -306,7 +309,6 @@ class Timetable extends React.Component {
                             ))}
                         </TableBody>
                     </Table>
-                    <RaisedButton label="generate" onClick={this.setTable}/>
                 </div>
                 <Dialog
                     open={this.state.showScheduleCreated}

@@ -23,19 +23,17 @@ class Sidebar extends React.Component {
 			values:[]
         };
 
+        this.getCourses();
+
     }
     getCourses(){
 		let context = this;
-		var ajaxResult=[];
+		let ajaxResult=[];
         sa.get('/api/course/bulk/').query({ university: this.state.university}).end(function(err,res){
-            
-			console.log(res.body.value);
 			for(let k in res.body.value){
 				ajaxResult.push(res.body.value[k]);
 				ajaxResult[ajaxResult.length-1]["key"] = k;
 			}
-			console.log(ajaxResult);
-			
 			context.setState({content:ajaxResult});
         });
     }
@@ -58,7 +56,6 @@ class Sidebar extends React.Component {
 
         return (
             <div style={styles.Wrapper}>
-                <RaisedButton id="loadBtn" label='import course data' onClick={this.getCourses}/>
 				<input type="text" style={styles.searchBar} placeholder="Search For Courses..."/>
 				<form className="scrollBox" style={styles.scrollBox}>
 						
@@ -70,7 +67,7 @@ class Sidebar extends React.Component {
 							</ul>
                        ))}
 				</form>
-				<button style={styles.button} onClick={this.addCourses}>Add</button>
+				<button style={styles.button} onClick={this.addCourses}>Set</button>
 				<button style={styles.button} onClick={this.generate}>Auto Fit</button>
             </div>
         );
