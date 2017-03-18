@@ -14,6 +14,10 @@ api.route('/Course')
 	.get(CourseController.retrieveCourse)
 	.post(CourseController.updateCourse)
 	.delete(CourseController.deleteCourse);
+api.route('/Course/bulk')
+    .put(CourseController.generateCourses)
+    .get(CourseController.getAllCourses)
+    .delete(CourseController.deleteCourses);
 
 api.route('/Login')
 	.put(LoginController.createLogin);
@@ -41,13 +45,4 @@ api.route('/CourseInfo')
 	.post(CourseInfoController.createCourseInfo);
 api.route('/CourseInfo')
 	.delete(CourseInfoController.createCourseInfo);
-
-api.route('/StudentTable')
-	.put(StudentTableController.createStudentTable);
-api.route('/StudentTable')
-	.get(StudentTableController.createStudentTable);
-api.route('/StudentTable')
-	.post(StudentTableController.createStudentTable);
-api.route('StudentTable')
-	.delete(StudentTableController.createStudentTable);
 export default api;
