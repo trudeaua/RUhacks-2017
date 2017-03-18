@@ -14,7 +14,8 @@ class Sidebar extends React.Component {
         Autobind(this);
         this.state = {
             university: 'University of Toronto',
-		content:[]
+		content:[],
+		coursesList:[]
         };
 
     }
@@ -41,19 +42,30 @@ class Sidebar extends React.Component {
                 <h1>Sidebar</h1>
                 <RaisedButton id="loadBtn" label='load courses' onClick={this.getCourses}/>
 				<input type="text" style={styles.searchBar} placeholder="Search For Courses..."/>
-				<div className="scrollBox" style={styles.scrollBox}>
+				<form className="scrollBox" style={styles.scrollBox}>
 					
                         {this.state.content.map( (row, index) => (
                             <ul key={index}>
-                                <input type="checkbox" style={styles.className} className="classData"/>{" " + row.faculty + " " + row.code + ": " + " " + row.name}
-                            </ul>
-                        ))}
-				</div>
-				<button style={styles.button}>Add</button>
+						<input type="checkbox" style={styles.className} className="classData" value={" " + row.faculty + " " + row.code + ": " + " " + row.room}/>{" " + row.faculty + " " + row.code + ": " + " " + row.name}
+							</ul>
+                       ))}
+				</form>
+				<button style={styles.button} onClick={this.addCourses}>Add</button>
 				<button style={styles.button}>Auto Fit</button>
             </div>
         );
     }
+	addCourses(){
+		var values = [],
+		inputs = document.getElementsByTagName("input");
+
+	for (var i = inputs.length -1 ; i>= 0; i--){
+    if (inputs[i].type === "checkbox" && inputs[i].checked){
+	values.push(inputs[i].value);}
+	}
+	return values;
+	
+	}
 }
 
 Sidebar.styles = {
