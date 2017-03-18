@@ -18,4 +18,11 @@ api.route('/Course')
 
 api.route('/Login')
 	.put(LoginController.createLogin);
+api.route('/Login')
+	.get(LoginController.createLogin);
+api.route('/Login')
+	.post(LoginController.createLogin);
+api.route('/Login')
+	.delete(LoginController.createLogin);
+
 export default api;

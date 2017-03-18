@@ -5,6 +5,7 @@ export default {
     createCourse(req, res) {
         let course = {};
         course.name = req.body.name;
+        course.code = req.body.code;
         firebase.database().ref().child('courses').push(course).then(function(snapshot){
             Response.sendMessage(res, 'Successfully created course');
         });
