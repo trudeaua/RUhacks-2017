@@ -14,6 +14,7 @@ class Sidebar extends React.Component {
         Autobind(this);
 
         this.onSetContent = props.onSetContent;
+        this.onGenerate = props.onGenerate;
         this.state = {
             university: 'University of Toronto',
 			content:[],
@@ -34,7 +35,9 @@ class Sidebar extends React.Component {
 			
 			context.setState({content:ajaxResult});
         });
-		
+    }
+    generate(){
+        this.onGenerate();
     }
     render() {
         const styles = lodash.cloneDeep(this.constructor.styles);
@@ -53,7 +56,7 @@ class Sidebar extends React.Component {
                        ))}
 				</form>
 				<button style={styles.button} onClick={this.addCourses}>Add</button>
-				<button style={styles.button}>Auto Fit</button>
+				<button style={styles.button} onClick={this.generate}>Auto Fit</button>
             </div>
         );
     }

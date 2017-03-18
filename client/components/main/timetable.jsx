@@ -12,7 +12,7 @@ import {browserHistory} from 'react-router';
 import Topbar from './topbar.jsx';
 import Sidebar from './sidebar.jsx';
 import ScheduleCreated from '../dialogs/scheduleCreated.jsx';
-
+import Preferences from '../dialogs/preferences.jsx';
 class Timetable extends React.Component {
     constructor(props) {
         super(props);
@@ -31,6 +31,7 @@ class Timetable extends React.Component {
             table: this.getCleanTable(),
 
             scheduleCode: '',
+            showPreferences: false,
             showScheduleCreated: false
         };
     }
@@ -267,6 +268,12 @@ class Timetable extends React.Component {
     onCloseScheduleCreated(){
         this.setState({showScheduleCreated: false});
     }
+    onClosePreferences(){
+        this.setState({showPreferences: false});
+    }
+    onGenerateSchedule(){
+        this.setState({showPreferences: true});
+    }
 
     render() {
         const styles = lodash.cloneDeep(this.constructor.styles);
@@ -274,7 +281,7 @@ class Timetable extends React.Component {
         return (
             <div style={styles.Wrapper}>
                 <div className="col-xs-12 col-md-3">
-                    <Sidebar onSetContent={this.setContent}/>
+                    <Sidebar onSetContent={this.setContent} onGenerate={this.onGenerateSchedule}/>
                 </div>
                 <div className="col-xs-12 col-md-9">
                     <Topbar onSave={this.onSave}/>
@@ -310,6 +317,12 @@ class Timetable extends React.Component {
                     onRequestClose={this.onCloseScheduleCreated}
                     contentStyle={styles.dialog}>
                     <ScheduleCreated code={this.state.scheduleCode} dismiss={this.onCloseScheduleCreated}/>
+                </Dialog>
+                <Dialog
+                    open={this.state.showPreferences}
+                    onRequestClose={this.onClosePreferences()}
+                    contentStyle={styles.dialog}>
+                    <Preferences onGenerate={this.onGenerateSchedule}/>
                 </Dialog>
             </div>
         );
