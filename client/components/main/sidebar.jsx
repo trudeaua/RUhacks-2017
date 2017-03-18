@@ -46,7 +46,7 @@ class Sidebar extends React.Component {
 					
                         {this.state.content.map( (row, index) => (
                             <ul key={index}>
-						<input type="checkbox" style={styles.className} className="classData" value={" " + row.faculty + " " + row.code + ": " + " " + row.room}/>{" " + row.faculty + " " + row.code + ": " + " " + row.name}
+						<input type="checkbox" style={styles.className} className="classData" value={" " + row.faculty + ", " + row.code + ", " + row.room}/>{[" " + row.faculty + ", " + row.code + ", " + row.name]}
 							</ul>
                        ))}
 				</form>
@@ -63,6 +63,7 @@ class Sidebar extends React.Component {
     if (inputs[i].type === "checkbox" && inputs[i].checked){
 	values.push(inputs[i].value);}
 	}
+	console.log(values);
 	return values;
 	
 	}
