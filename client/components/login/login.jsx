@@ -33,17 +33,16 @@ class Login extends React.Component {
 			  <option value="uoft">University of Toronto</option>
 			  <option value="ryerson">Ryerson University</option>
 			</select>
-<<<<<<< HEAD
 			<button type="submit" className="button" style ={styles.button}>Generate My Timetable!</button>
 		  <h4 style={styles.h2}>Or Input Your 4-Digit Code From A Previous Session</h4>
 			<input type="text" style={styles.txt} placeholder="ID" name="ID" maxLength="4" className="txt"></input>
 
 			<button type="submit" className="button" style ={styles.button}>Go To My Timetable!</button>
-=======
+
 			<input type="text" style={styles.txt} placeholder="ID" name="ID" maxLength="4" className="txt"/>
 
 			<button type="submit" className="button" style ={styles.button} onClick={this.onGo}>Go!</button>
->>>>>>> d2a02591afc60831f96e30d08c63da82796f7fb4
+
 		  </form>
 		</div>
 		</div>
