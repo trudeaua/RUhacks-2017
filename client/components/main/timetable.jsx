@@ -18,8 +18,15 @@ class Timetable extends React.Component {
         super(props);
         Autobind(this);
 
+        if (this.props.code != undefined){
+
+        } else {
+
+        }
+
         this.state = {
-            university: this.props.university,
+            code: '',
+            university: '',
             content: this.getContent(),
             table: this.getCleanTable(),
 

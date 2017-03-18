@@ -35,7 +35,10 @@ class Login extends React.Component {
                 console.log(err);
             } else {
                 if (res.body.success){
-
+                    browserHistory.push({
+                        pathname: '/main',
+                        query: { code: context.state.code }
+                    });
                 } else {
                     context.setState({codeError: 'Invalid Code'});
                 }
