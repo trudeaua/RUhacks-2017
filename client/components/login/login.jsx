@@ -1,6 +1,7 @@
 import React from 'react';
 import lodash from 'lodash';
 import Autobind from 'react-autobind';
+import sa from 'superagent';
 import {browserHistory} from 'react-router';
 
 import Paper from 'material-ui/Paper';
@@ -27,12 +28,26 @@ class Login extends React.Component {
             query: { university: this.state.university}
         });
     }
+    onLoadSchedule(){
+        let context = this;
+        sa.get('/api/schedule?code=' + this.state.code).end(function(err,res){
+            if (err){
+                console.log(err);
+            } else {
+                if (res.body.success){
+                    
+                } else {
+                    context.setState({codeError: 'Invalid Code'});
+                }
+            }
+        });
+    }
 
     onSelectChange(e, index, val){
         this.setState({university: val});
     }
     onTextFieldChange(e){
-        this.setState({[e.target.name]: e.target.value});
+        this.setState({code: e.target.value, codeError: ''});
     }
 
     render() {
@@ -54,8 +69,8 @@ class Login extends React.Component {
                     </SelectField><br/>
                     <RaisedButton style={styles.spacing} label="Create New Timetable" onClick={this.onNewTimetable} disabled={this.university === ''}/><br/>
                     <Divider style={styles.spacing}/><br/>
-                    <TextField style={styles.spacing} floatingLabelText="Schedule Code" errorText={this.state.codeError}/><br/>
-                    <RaisedButton name="code" style={styles.spacing} label="Load Timetable" disabled={this.state.code === ''}/>
+                    <TextField style={styles.spacing} floatingLabelText="Schedule Code" errorText={this.state.codeError} onChange={this.onTextFieldChange}/><br/>
+                    <RaisedButton name="code" style={styles.spacing} label="Load Timetable" disabled={this.state.code === ''} onClick={this.onLoadSchedule}/>
                 </Paper>
             </div>
         </div>
