@@ -4,6 +4,7 @@ import Autobind from 'react-autobind';
 
 import {Table, TableHeader, TableRow, TableHeaderColumn, TableBody, TableRowColumn} from 'material-ui/Table';
 import Divider from 'material-ui/Divider';
+import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 
 import Topbar from './topbar.jsx';
@@ -14,10 +15,26 @@ class Timetable extends React.Component {
         Autobind(this);
 
         this.state = {
+            content: this.getContent(),
             table: this.getCleanTable()
         }
     }
 
+    getContent(){
+        return [{
+            university: 'University of Toronto',
+            name: 'Intro to 1',
+            faculty: 'CSC',
+            code: '200',
+            room: 'BA1200',
+            lecture_times: [
+                'M-12-13'
+            ],
+            tutorial_times: [
+                'W-12-13'
+            ]
+        }];
+    }
     getCleanTable(){
         let table = [];
         for (let i = 8; i < 12; i++){
@@ -81,6 +98,13 @@ class Timetable extends React.Component {
         return table;
     }
 
+    setTable(){
+        let table = this.getCleanTable();
+        let content = this.state.content;
+        for (let i = 0; i < content.length; i++){
+        }
+    }
+
     render() {
         const styles = lodash.cloneDeep(this.constructor.styles);
 
@@ -112,6 +136,7 @@ class Timetable extends React.Component {
                         ))}
                     </TableBody>
                 </Table>
+
             </div>
         );
     }
