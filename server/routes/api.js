@@ -1,7 +1,8 @@
 import express from 'express';
 import CourseController from '../controllers/course-controller';
 import LoginController from '../controllers/login-controller';
-
+import UniversityController from '../controllers/university-controller';
+import CourseInfoController from '../controllers/courseinfo-controller';
 const api = express.Router();
 
 api.get('/', function(req, res){
@@ -26,4 +27,30 @@ api.route('/Login')
 api.route('/Login')
 	.delete(LoginController.createLogin);
 
+api.route('/University')
+	.put(UniversityController.createUniversity);
+api.route('/University')
+	.get(Universitycontroller.createUniversity);
+api.route('/University')
+	.post(UniversityController.createUniversity);
+api.route('/University')
+	.delete(UniversityController.createUniversity);
+
+api.route('/CourseInfo')
+	.put(CourseInfoController.createCourseInfo);
+api.route('/CourseInfo')
+	.get(CourseInfoController.createCourseInfo);
+api.route('/CourseInfo')
+	.post(CourseInfoController.createCourseInfo);
+api.route('/CourseInfo')
+	.delete(CourseInfoController.createCourseInfo);
+
+api.route('/StudentTable')
+	.put(StudentTableController.createStudentTable);
+api.route('/StudentTable')
+	.get(StudentTableController.createStudentTable);
+api.route('/StudentTable')
+	.post(StudentTableController.createStudentTable);
+api.route('StudentTable')
+	.delete(StudentTableController.createStudentTable);
 export default api;
