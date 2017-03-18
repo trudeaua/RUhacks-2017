@@ -3,27 +3,25 @@ import * as firebase from 'firebase';
 
 export default {
     createCourse(req, res) {
-        let course = {};
-        course.name = req.body.name;
-        course.code = req.body.code;
+        let course = req.body;
         firebase.database().ref().child('courses').push(course).then(function(snapshot){
             Response.sendMessage(res, 'Successfully created course');
         });
-        firebase.database().ref().child('courses').get(course).then(function(snapshot){
-        	Response.sendMessage(res, 'Successfully Grabbed course');
+    },
+    retrieveCourse(req, res){
+        firebase.database().ref('/courses/' + req.query.id).once('value').then(function(snapshot) {
+            Response.sendObject(res, 'val', snapshot.val());
         });
-        firebase.database().ref().child('courses').put(course).then(function(snapshot){
-        	Response.sendMessage(res, 'Successfully create course');
+    },
+    updateCourse(req, res) {
+        let course = req.body;
+        firebase.database().ref('/courses/' + req.query.id).set(course).then(function(snapshot) {
+            Response.sendMessage(res, 'Successfully updated course.');
         });
-        firebase.database().ref().child('courses').post(course).then(function(snapshot){
-        	Response.sendMessage(res, 'Successfully updated course');
+    },
+    deleteCourse(req, res) {
+        firebase.database().ref('/courses/' +req.query.id).remove().then(function(snapshot){
+            Response.sendMessage(res, 'Successfully deleted course');
         });
-        firebase.database().ref().child('courses').delete(course).then(function(snapshot){
-        	Response.sendMessage(res, 'Successfully removed course');
-        });pm
     }
 };
-//get grab
-//put create
-//post update
-//delete

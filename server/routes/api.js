@@ -9,13 +9,10 @@ api.get('/', function(req, res){
 });
 
 api.route('/Course')
-    .put(CourseController.createCourse);
-api.route('/Course')
-	.get(CourseController.createCourse);
-api.route('/Course')
-	.post(CourseController.createCourse);
-api.route('/Course')
-	.delete(CourseController.createCourse);
+    .put(CourseController.createCourse)
+	.get(CourseController.retrieveCourse)
+	.post(CourseController.updateCourse)
+	.delete(CourseController.deleteCourse);
 
 api.route('/Login')
 	.put(LoginController.createLogin);
