@@ -42,6 +42,17 @@ class Sidebar extends React.Component {
     generate(){
         this.onGenerate();
     }
+    addCourses(){
+        let inputs = document.getElementsByTagName("input");
+        let vals = [];
+        for (let i = inputs.length -1 ; i>= 0; i--){
+            if (inputs[i].type === "checkbox" && inputs[i].checked){
+                vals.push(inputs[i].value);}
+        }
+        this.setState({values: vals}, function(){
+            this.onSetContent(this.state.values);
+        });
+    }
     render() {
         const styles = lodash.cloneDeep(this.constructor.styles);
 
@@ -64,16 +75,6 @@ class Sidebar extends React.Component {
             </div>
         );
     }
-	addCourses(){
-		var inputs = document.getElementsByTagName("input");
-
-		for (var i = inputs.length -1 ; i>= 0; i--){
-			if (inputs[i].type === "checkbox" && inputs[i].checked){
-			this.state.values.push(inputs[i].value);}
-		}
-		console.log(this.state.values);
-		this.onSetContent(this.state.values);
-	}
 }
 
 Sidebar.styles = {

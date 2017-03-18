@@ -6,6 +6,9 @@ import sa from 'superagent';
 import {browserHistory} from 'react-router';
 
 import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 
 class Preferences extends React.Component {
     constructor(props) {
@@ -16,7 +19,6 @@ class Preferences extends React.Component {
 
         };
     }
-
     onTimeChange(){
 
     }
@@ -31,7 +33,7 @@ class Preferences extends React.Component {
                 <h1>Preferences</h1>
                 <SelectField
                     floatingLabelText="Time Preference"
-                    onChange={this.onSelectChange}
+                    onChange={this.onTimeChange}
                     value={this.state.university}
                     style={{margin: '2% 0 2% 0', textAlign:'left'}}>
                     <MenuItem value='No Preference' primaryText="No Preference" />
@@ -40,7 +42,7 @@ class Preferences extends React.Component {
                 </SelectField><br/>
                 <SelectField
                     floatingLabelText="Course Gap Preference"
-                    onChange={this.onSelectChange}
+                    onChange={this.onGapChange}
                     value={this.state.university}
                     style={{margin: '2% 0 2% 0', textAlign:'left'}}>
                     <MenuItem value='No Preference' primaryText="No Preference" />

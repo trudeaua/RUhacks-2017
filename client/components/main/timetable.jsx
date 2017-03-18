@@ -252,9 +252,9 @@ class Timetable extends React.Component {
         });
     }
     generateCode() {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for( var i=0; i < 5; i++ ) {
+        let text = "";
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for( let i=0; i < 5; i++ ) {
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         }
         return text;
@@ -267,6 +267,7 @@ class Timetable extends React.Component {
         this.setState({showPreferences: false});
     }
     onGenerateSchedule(){
+        console.log('here');
         this.setState({showPreferences: true});
     }
 
@@ -315,7 +316,7 @@ class Timetable extends React.Component {
                 </Dialog>
                 <Dialog
                     open={this.state.showPreferences}
-                    onRequestClose={this.onClosePreferences()}
+                    onRequestClose={this.onClosePreferences}
                     contentStyle={styles.dialog}>
                     <Preferences onGenerate={this.onGenerateSchedule}/>
                 </Dialog>
