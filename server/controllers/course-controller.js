@@ -2,26 +2,26 @@ import Response from './response-controller.js';
 import * as firebase from 'firebase';
 
 export default {
-    createSchedule(req, res) {
-        let schedule = req.body;
-        firebase.database().ref().child('schedules').push(schedule).then(function(snapshot){
-            Response.sendMessage(res, 'Successfully created schedule');
+    createCourse(req, res) {
+        let course = req.body;
+        firebase.database().ref().child('courses').push(course).then(function(snapshot){
+            Response.sendMessage(res, 'Successfully created course');
         });
     },
-    retrieveSchedule(req, res){
-        firebase.database().ref('/schedules/' + req.query.id).once('value').then(function(snapshot) {
+    retrieveCourse(req, res){
+        firebase.database().ref('/courses/' + req.query.id).once('value').then(function(snapshot) {
             Response.sendObject(res, 'val', snapshot.val());
         });
     },
-    updateSchedule(req, res) {
+    updateCourse(req, res) {
         let course = req.body;
-        firebase.database().ref('/schedules/' + req.query.id).set(course).then(function(snapshot) {
-            Response.sendMessage(res, 'Successfully updated schedule.');
+        firebase.database().ref('/courses/' + req.query.id).set(course).then(function(snapshot) {
+            Response.sendMessage(res, 'Successfully updated course.');
         });
     },
-    deleteSchedule(req, res) {
-        firebase.database().ref('/schedules/' +req.query.id).remove().then(function(snapshot){
-            Response.sendMessage(res, 'Successfully deleted schedule');
+    deleteCourse(req, res) {
+        firebase.database().ref('/courses/' +req.query.id).remove().then(function(snapshot){
+            Response.sendMessage(res, 'Successfully deleted course');
         });
     }
 };

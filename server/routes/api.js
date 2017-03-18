@@ -14,9 +14,9 @@ api.route('/Course')
 	.delete(CourseController.deleteCourse);
 
 api.route('/Schedule')
-	.put(ScheduleController.createLogin);
-	.get(ScheduleController.retrieveLogin);
-	.post(ScheduleController.updateLogin);
-	.delete(ScheduleController.deleteLogin);
+	.put(ScheduleController.createSchedule)
+	.get(ScheduleController.retrieveSchedule)
+	.post(ScheduleController.updateSchedule)
+	.delete(ScheduleController.deleteSchedule);
 
 export default api;
