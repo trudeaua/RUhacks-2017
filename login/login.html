@@ -1,0 +1,23 @@
+<html>
+<link href="style.css" rel="stylesheet">
+<body>
+	<div id="logo"></div>
+		<div class="form-container">
+			
+		  <h2>Automatic Timetable Generator</h2>
+		  <form>
+
+			<select placeholder="Schools" name="schools" class="dropdown">
+			  <option selected="selected" value="selected">Select a School...</option>
+			  <option value="mcmaster">McMaster University</option>
+			  <option value="uoft">University of Toronto</option>
+			  <option value="ryerson">Ryerson University</option>
+			</select>
+			<input type="text" placeholder="ID" name="ID" maxlength="4" class="txt">
+
+			<button type="submit" [disabled]="!formData.valid" class="basic-btn">Go!</button>
+		  </form>
+		</div>
+	
+</body>
+</html>
