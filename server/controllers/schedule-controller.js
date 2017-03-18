@@ -31,5 +31,11 @@ export default {
         firebase.database().ref('/schedules/' +req.query.id).remove().then(function(snapshot){
             Response.sendMessage(res, 'Successfully deleted schedule');
         });
+    },
+
+    clearSchedules(req, res) {
+        firebase.database().ref('/schedules/').remove().then(function(snapshot){
+            Response.sendMessage(res, 'Successfully deleted schedules');
+        });
     }
 };

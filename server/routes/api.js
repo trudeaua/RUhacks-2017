@@ -22,5 +22,5 @@ api.route('/Schedule')
 	.get(ScheduleController.retrieveSchedule)
 	.post(ScheduleController.updateSchedule)
 	.delete(ScheduleController.deleteSchedule);
-
+api.route('/Schedule/bulk').delete(ScheduleController.clearSchedules);
 export default api;
